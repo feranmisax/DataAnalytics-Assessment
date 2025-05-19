@@ -44,8 +44,8 @@ This document contains the SQL queries developed for analyzing data from the `ad
 
 ### 3. Account Inactivity Alert
 
-* **Explanation of Approach (based on the user-provided query):**
-    My approach, as reflected in the query I constructed, was to identify "active accounts" primarily from the `plans_plan` table and identify "inflow transaction" activity and the "last transaction date" using only the columns available in `plans_plan` and `savings_savingsaccount`.
+* **Explanation of Approach:**
+    My approach was to identify "active accounts" primarily from the `plans_plan` table and identify "inflow transaction" activity and the "last transaction date" using only the columns available in `plans_plan` and `savings_savingsaccount`.
 
     1.  **Setting the Current Date:** I set `@current_date = CURDATE();` so the inactivity calculation is always relative to the day the query is run.
     2.  **Identifying Active Plans (`active_plans` CTE):**
@@ -106,11 +106,11 @@ This document contains the SQL queries developed for analyzing data from the `ad
 ## General Challenges Encountered & Resolutions
 
 1.  **Schema Discovery and Accuracy:**
-    * **Challenge:** The first challenge I faced was having few tables and columns to effectively carry out this analysis using the `adashi_assessment.sql` dump (e.g., `is_regular_savings`, `savings_id`, `status_id`, `created_on`, `last_charge_date`). This directly impacted query accuracy and executability.
+    * **Challenge:** The first challenge I faced was having few tables and columns to effectively carry out this analysis using the `adashi_assessment.sql` dump. This directly impacted query accuracy and executability.
     * **Resolution:** I consistently referred back to the `adashi_assessment.sql` dump to verify actual table structures, column names, primary/foreign keys, data types, and the meaning of status/type codes. I also made use of the hint provided in the doc to guide me.
 
 2.  **Interpreting Business Logic under Strict Table Constraints:**
-    * **Challenge:** Several questions imposed strict limitations on table usage (e.g., tables `users_customuser` and `savings_savingsaccount`") even when these tables lacked direct data for the required metrics (like detailed transaction history for "transaction frequency" or "CLV"). This necessitated making significant assumptions and using available fields as proxies.
+    * **Challenge:** There were limitations on what tables to use per question (e.g., tables `users_customuser` and `savings_savingsaccount`") even when these tables lacked direct data for the required metrics (like detailed transaction history for "transaction frequency" or "CLV"). This necessitated making significant assumptions and using available fields as proxies.
     * **Resolution:** When faced with this issue, I make sure to fully understand each question and look through the tables to see how they both link for such specific question.
 
 3.  **Date and Time Functions for Analysis:**
@@ -125,4 +125,4 @@ This document contains the SQL queries developed for analyzing data from the `ad
     * **Challenge:** Some queries were developed assuming a fixed "current date" based on data recency, while others provided by the user employed `CURDATE()`.
     * **Resolution:** I adapted the explanations and the `SET @current_date` line to match the context of the specific query being documented for the README.
 
-This consolidated README provides explanations for each query alongside the challenges faced and how they were resolved.
+This README provides explanations for each query alongside the challenges faced and how they were resolved.
