@@ -102,5 +102,3 @@ WHERE
 ORDER BY
     inactivity_days DESC;
 
-
-    

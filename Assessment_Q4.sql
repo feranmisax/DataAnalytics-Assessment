@@ -53,5 +53,3 @@ ORDER BY
     estimated_clv DESC
 
 
-
-    

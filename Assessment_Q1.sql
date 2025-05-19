@@ -49,5 +49,3 @@ INNER JOIN (
 ORDER BY
     total_deposits DESC; -- Sorts the final results by the total deposits in descending order
 
-
-    
