@@ -126,3 +126,5 @@ This document contains the SQL queries developed for analyzing data from the `ad
     * **Resolution:** I adapted the explanations and the `SET @current_date` line to match the context of the specific query being documented for the README.
 
 This README provides explanations for each query alongside the challenges faced and how they were resolved.
+
+

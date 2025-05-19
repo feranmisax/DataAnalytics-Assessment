@@ -101,3 +101,6 @@ WHERE
     END < DATE_SUB(@current_date, INTERVAL 365 DAY)
 ORDER BY
     inactivity_days DESC;
+
+
+    

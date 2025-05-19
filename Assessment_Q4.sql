@@ -51,3 +51,7 @@ LEFT JOIN
     account_aggregates aa ON ct.customer_id = aa.owner_id
 ORDER BY
     estimated_clv DESC
+
+
+
+    

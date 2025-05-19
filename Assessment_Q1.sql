@@ -47,4 +47,7 @@ INNER JOIN (
 ) AS ui ON uc.id = ui.owner_id -- Further ensures that these users are also present in UserInvestments (i.e., have funded investments).
 
 ORDER BY
-    total_deposits DESC; -- Sorts the final results by the total deposits in descending order.
+    total_deposits DESC; -- Sorts the final results by the total deposits in descending order
+
+
+    
