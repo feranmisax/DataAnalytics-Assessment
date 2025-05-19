@@ -109,19 +109,15 @@ This document contains the SQL queries developed for analyzing data from the `ad
     * **Challenge:** The first challenge I faced was having few tables and columns to effectively carry out this analysis using the `adashi_assessment.sql` dump. This directly impacted query accuracy and executability.
     * **Resolution:** I consistently referred back to the `adashi_assessment.sql` dump to verify actual table structures, column names, primary/foreign keys, data types, and the meaning of status/type codes. I also made use of the hint provided in the doc to guide me.
 
-2.  **Interpreting Business Logic under Strict Table Constraints:**
-    * **Challenge:** There were limitations on what tables to use per question (e.g., tables `users_customuser` and `savings_savingsaccount`") even when these tables lacked direct data for the required metrics (like detailed transaction history for "transaction frequency" or "CLV"). This necessitated making significant assumptions and using available fields as proxies.
-    * **Resolution:** When faced with this issue, I make sure to fully understand each question and look through the tables to see how they both link for such specific question.
-
-3.  **Date and Time Functions for Analysis:**
+2.  **Date and Time Functions for Analysis:**
     * **Challenge:** Ensuring consistent and correct date/time calculations for metrics like tenure or inactivity periods.
     * **Resolution:** I utilized standard SQL date/time functions appropriate for MySQL (which the dump syntax suggests), such as `TIMESTAMPDIFF()`, `DATEDIFF()`, `DATE_SUB()`, `GREATEST()`, `COALESCE()`, and `DATE()`. A fixed `@current_date` variable was often discussed and used for reproducibility in time-sensitive analyses, or `CURDATE()` if specified in the user's query.
 
-4.  **Handling NULLs, Data Integrity, and Division by Zero:**
+3.  **Handling NULLs, Data Integrity, and Division by Zero:**
     * **Challenge:** Ensuring that aggregations, joins, and arithmetic calculations handle `NULL` values effectively and potential errors like division by zero (e.g., in CLV if tenure was zero or transaction counts were zero).
     * **Resolution:** I used `COALESCE()` to handle `NULL`s in calculations (e.g., defaulting `NULL` sums to 0). For division, I ensured denominators were non-zero, often by using `GREATEST(1, denominator)` for quantities like tenure, or by using `CASE` statements to explicitly handle scenarios where a denominator might be zero (e.g., setting CLV to 0 if there were no transactions). `LEFT JOIN` was used when records from one table were needed regardless of a match, while `INNER JOIN` was used to enforce conditions requiring matches across all joined tables.
 
-5.  **Dynamic vs. Fixed "Current Date":**
+4.  **Dynamic vs. Fixed "Current Date":**
     * **Challenge:** Some queries were developed assuming a fixed "current date" based on data recency, while others provided by the user employed `CURDATE()`.
     * **Resolution:** I adapted the explanations and the `SET @current_date` line to match the context of the specific query being documented for the README.
 
